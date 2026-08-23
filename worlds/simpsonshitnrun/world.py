@@ -42,7 +42,7 @@ class SimpsonsHitNRunWorld(World):
     card_table: list[locations.Card]
     def __init__(self, multiworld: MultiWorld, player: int):
         super().__init__(multiworld, player)
-        self.apworld_version = "0.5.4"
+        self.apworld_version = "0.5.5"
         self.missionlockdict = {}
         self.card_table = []
         self.prog_cars = []
@@ -126,24 +126,24 @@ class SimpsonsHitNRunWorld(World):
             if name in car_name_to_internal_id
         }
 
+        global_blacklisted_ids = {
+            car_name_to_internal_id[name]
+            for name in {"Bandit", "Krusty's Limo", "Honor Roller", "Malibu Stacy Car", "Canyonero", "Longhorn", "Ferrini - Red", "70's Sports Car", "Hearse"}
+            if name in car_name_to_internal_id
+        }
+
+        blacklisted_ids.update(global_blacklisted_ids)
+
         available_traffic = [
             v for v in car_name_to_internal_id.values()
             if v not in blacklisted_ids
         ]
-
-        LEVEL_LOCKED_TRAFFIC = {
-            "Mini School Bus", "Glass Truck", "Minivan", "Pizza Van", "Taxi", "Sedan B", "Fish Van",
-            "Garbage Truck", "Nuclear Waste Truck", "Pickup", "Sports Car A", "Compact Car", "SUV",
-            "Hallo Hearse", "Coffin Car", "Ghost Ship", "Witch Broom"
-        }
 
         level_blacklists = defaultdict(set)
 
         for name, item in ITEM_DEFS.items():
             if not item.is_car:
                 continue
-            #if name not in LEVEL_LOCKED_TRAFFIC:
-            #    continue
 
             for level in item.level:
                 level_blacklists[level].add(item.internal_id)
@@ -197,6 +197,6 @@ class SimpsonsHitNRunWorld(World):
 
     def write_spoiler(self, spoiler_handle):
         if self.options.Mission_Locks:
-            spoiler_handle.write("\nMission Locks:\n")
+            spoiler_handle.write(f"\n{self.multiworld.get_file_safe_player_name(self.player)}'s Mission Locks:\n")
             for i, (m, c) in enumerate(sorted(self.missionlockdict.items(), key=lambda item: (int(item[0][2]), int(item[0][4]))), start=1):
                 spoiler_handle.write(f"{i}: {m} requires {c}\n")
