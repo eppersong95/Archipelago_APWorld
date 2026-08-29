@@ -783,7 +783,7 @@ def set_all_location_rules(world: SimpsonsHitNRunWorld) -> None:
     set_rule_if_location_exists(world, "(LVL 3) CARD - Lumber King Billboard", lambda state: state.has("Lisa Progressive Jump", world.player) or \
                                                                                                            state.has_any(get_cars_by_height("Plow King", 0, False, False), world.player))
     set_rule_if_location_exists(world, "(LVL 3) CARD - Box Near Gil", lambda state: state.has("Lisa Progressive Jump", world.player, 2)  or \
-                                                                                                  state.has_any([c for c in get_cars_by_height("Mini School Bus", 0, False, False) if car != "Monorail Car"], world.player))
+                                                                                                  state.has_any([c for c in get_cars_by_height("Mini School Bus", 0, False, False) if c != "Monorail Car"], world.player))
     set_rule_if_location_exists(world, "(LVL 3) CARD - Davey Jones Hamper", lambda state: state.has("Lisa Progressive Jump", world.player) or \
                                                                                                         state.has_any(get_cars_by_height("Burns Armored Truck", 0, False, False), world.player))
     set_rule_if_location_exists(world, "(LVL 3) CARD - Globex Ship Crane", lambda state: state.has("Lisa Progressive Jump", world.player, 2))

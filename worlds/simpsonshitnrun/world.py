@@ -128,7 +128,8 @@ class SimpsonsHitNRunWorld(World):
 
         global_blacklisted_ids = {
             car_name_to_internal_id[name]
-            for name in {"Bandit", "Krusty's Limo", "Honor Roller", "Malibu Stacy Car", "Canyonero", "Longhorn", "Ferrini - Red", "70's Sports Car", "Hearse"}
+            for name in {"Bandit", "Krusty's Limo", "Honor Roller", "Malibu Stacy Car", "Canyonero", "Longhorn", "Ferrini - Red", "70's Sports Car", "Hearse",
+                         "R/C Buggy", "Hover Bike", "Witch Broom", "ATV", "Itchy and Scratchy Movie Truck"}
             if name in car_name_to_internal_id
         }
 
