@@ -119,6 +119,8 @@ class SimpsonsHitNRunWorld(World):
             for _ in range(6)
         ]
 
+        slot_data["death_link"] = self.options.death_link.value
+
         return slot_data
 
     def generate_output(self, output_directory: str):
